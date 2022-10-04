@@ -7,12 +7,13 @@
 
 uniform float Power < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.1; ui_max = 10.0;
-	ui_tooltip = "Amount of effect you want.";
+	ui_label = "强度";
+	ui_tooltip = "你想要的效果。";
 > = 1.5;
 uniform float EdgeSlope < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.1; ui_max = 6.0;
-	ui_label = "Edge Slope";
-	ui_tooltip = "Raise this to filter out fainter edges. You might need to increase the power to compensate. Whole numbers are faster.";
+	ui_label = "边缘坡度";
+	ui_tooltip = "提高这个值以过滤掉模糊的边缘。你可能需要增加功率来补偿。整数更快。";
 > = 1.5;
 
 #include "ReShade.fxh"
@@ -33,6 +34,10 @@ float3 CartoonPass(float4 position : SV_Position, float2 texcoord : TEXCOORD) : 
 }
 
 technique Cartoon
+<
+	ui_label = "卡通效果";
+	ui_tooltip = "没用的效果";
+>
 {
 	pass
 	{

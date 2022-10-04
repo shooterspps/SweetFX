@@ -28,21 +28,21 @@ uniform float2 border_width <
 
 uniform float2 border_width <
 	ui_type = "drag";
-	ui_label = "Size";
-	ui_tooltip = "Measured in pixels. If this is set to zero then the ratio will be used instead.";
+	ui_label = "大小";
+	ui_tooltip = "以像素。如果这个设置为零，那么将使用比率。";
 	ui_min = 0.0; ui_max = (BUFFER_WIDTH * 0.5);
 	ui_step = 1.0;
 	> = float2(0.0, 0.0);
 
 uniform float border_ratio <
 	ui_type = "input";
-	ui_label = "Size Ratio";
-	ui_tooltip = "Set the desired ratio for the visible area.";
+	ui_label = "尺寸比";
+	ui_tooltip = "为可见区域设置所需的比率。";
 > = 2.35;
 
 uniform float3 border_color <
 	ui_type = "color";
-	ui_label = "Border Color";
+	ui_label = "边缘色彩";
 > = float3(0.0, 0.0, 0.0);
 
 float3 BorderPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : SV_Target
@@ -64,6 +64,10 @@ float3 BorderPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : SV_Ta
 }
 
 technique Border
+<
+	ui_label = "屏幕边界";
+	ui_tooltip = "感觉没用";
+>
 {
 	pass
 	{

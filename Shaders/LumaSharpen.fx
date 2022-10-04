@@ -14,36 +14,36 @@
 
 uniform float sharp_strength < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.1; ui_max = 3.0;
-	ui_label = "Shapening strength";
-	ui_tooltip = "Strength of the sharpening";
+	ui_label = "锐化强度";
+	ui_tooltip = "锐化的强度";
 
 > = 0.65;
 uniform float sharp_clamp < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0; ui_step = 0.005;
-	ui_label = "Sharpening limit";
-	ui_tooltip = "Limits maximum amount of sharpening a pixel receives\nThis helps avoid \"haloing\" artifacts which would otherwise occur when you raised the strength too much.";
+	ui_label = "锐化极限";
+	ui_tooltip = "限制像素接收到的最大锐化量\n这有助于避免当强度提高太多时出现的“光晕”现象。";
 > = 0.035;
 uniform int pattern <
 	ui_type = "combo";
-	ui_items =	"Fast" "\0"
-				"Normal" "\0"
-				"Wider"	"\0"
-				"Pyramid shaped" "\0";
-	ui_label = "Sample pattern";
-	ui_tooltip = "Choose a sample pattern.\n"
-	"Fast is faster but slightly lower quality.\n"
-	"Normal is normal.\n"
-	"Wider is less sensitive to noise but also to fine details.\n"
-	"Pyramid has a slightly more aggresive look.";
+	ui_items =	"快" "\0"
+				"正常" "\0"
+				"广泛"	"\0"
+				"金字塔状" "\0";
+	ui_label = "样本模式";
+	ui_tooltip = "选择一个样本模式。\n"
+	"快是更快，但质量稍低。\n"
+	"正常是正常的。\n"
+	"广泛对噪音不太敏感,但是也讲究细节。\n"
+	"金字塔的外观略显奇怪。";
 > = 1;
 uniform float offset_bias < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 6.0;
-	ui_label = "Offset bias";
-	ui_tooltip = "Offset bias adjusts the radius of the sampling pattern. I designed the pattern for an offset bias of 1.0, but feel free to experiment.";
+	ui_label = "偏移偏差";
+	ui_tooltip = "偏移偏差调整采样模式的半径。我为1.0的偏移量设计了这个模式，但是可以自由地进行试验。";
 > = 1.0;
 uniform bool show_sharpen <
-	ui_label = "Show sharpening pattern";
-	ui_tooltip = "Visualize the strength of the sharpen\nThis is useful for seeing what areas the sharpning affects the most";
+	ui_label = "显示锐化模式";
+	ui_tooltip = "可视化锐化的强度\n这对于查看锐化对哪些区域影响最大很有用";
 > = false;
 
 #include "ReShade.fxh"
@@ -191,6 +191,9 @@ float3 LumaSharpenPass(float4 position : SV_Position, float2 tex : TEXCOORD) : S
 }
 
 technique LumaSharpen
+< 
+	ui_label = "亮度锐化";
+>
 {
 	pass
 	{

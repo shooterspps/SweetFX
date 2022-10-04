@@ -42,12 +42,12 @@
 
 uniform int Monochrome_preset <
 	ui_type = "combo";
-	ui_label = "Preset";
-	ui_tooltip = "Choose a preset";
+	ui_label = "预设";
+	ui_tooltip = "选择一个预设";
 	//ui_category = "";
-	ui_items = "Custom\0"
-	"Monitor or modern TV\0"
-	"Equal weight\0"
+	ui_items = "自定义\0"
+	"显示器或现代电视\0"
+	"同等权量\0"
 	"Agfa 200X\0"
 	"Agfapan 25\0"
 	"Agfapan 100\0"
@@ -66,7 +66,7 @@ uniform int Monochrome_preset <
 > = 0;
 
 uniform float3 Monochrome_conversion_values < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Custom Conversion values";
+	ui_label = "自定义转换的值";
 > = float3(0.21, 0.72, 0.07);
 
 /*
@@ -77,7 +77,7 @@ uniform bool Normalize <
 */
 
 uniform float Monochrome_color_saturation < __UNIFORM_SLIDER_FLOAT1
-	ui_label = "Saturation";
+	ui_label = "饱和";
 	ui_min = 0.0; ui_max = 1.0;
 > = 0.0;
 
@@ -122,6 +122,9 @@ float3 MonochromePass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : S
 }
 
 technique Monochrome
+<
+	ui_label = "单色照片";
+>
 {
 	pass
 	{

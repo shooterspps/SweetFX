@@ -19,14 +19,15 @@
 
 uniform float Vibrance < __UNIFORM_SLIDER_FLOAT1
 	ui_min = -1.0; ui_max = 1.0;
-	ui_tooltip = "Intelligently saturates (or desaturates if you use negative values) the pixels depending on their original saturation.";
+	ui_label = "饱和";
+	ui_tooltip = "智能饱和(或降低饱和度，如果你使用负值)像素取决于他们的原始饱和度。";
 > = 0.15;
 
 uniform float3 VibranceRGBBalance <
 	ui_type = "drag";
 	ui_min = 0.0; ui_max = 10.0;
-	ui_label = "RGB Balance";
-	ui_tooltip = "A per channel multiplier to the Vibrance strength so you can give more boost to certain colors over others.\nThis is handy if you are colorblind and less sensitive to a specific color.\nYou can then boost that color more than the others.";
+	ui_label = "RGB 平衡";
+	ui_tooltip = "每个通道的振动倍增器的强度，所以你可以给予更多的推动某些颜色超过其他。\n如果你是色盲，对特定的颜色不太敏感，这很方便。然后你就可以比其他颜色更突出颜色。";
 > = float3(1.0, 1.0, 1.0);
 
 /*
@@ -66,6 +67,9 @@ float3 VibrancePass(float4 position : SV_Position, float2 texcoord : TexCoord) :
 }
 
 technique Vibrance
+<
+	ui_label = "色调调整";
+>
 {
 	pass
 	{

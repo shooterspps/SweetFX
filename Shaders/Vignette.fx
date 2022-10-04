@@ -10,27 +10,33 @@
 
 uniform int Type <
 	ui_type = "combo";
-	ui_items = "Original\0New\0TV style\0Untitled 1\0Untitled 2\0Untitled 3\0Untitled 4\0";
+	ui_label = "类型";
+	ui_items = "原始\0新\0电视风格\0无题 1\0无题 2\0无题 3\0无题 4\0";
 > = 0;
 uniform float Ratio < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.15; ui_max = 6.0;
-	ui_tooltip = "Sets a width to height ratio. 1.00 (1/1) is perfectly round, while 1.60 (16/10) is 60 % wider than it's high.";
+	ui_label = "比例";
+	ui_tooltip = "设置宽高比。1.00(1/1)是完美的圆形，而1.60(16/10)比它的高宽60%";
 > = 1.0;
 uniform float Radius < __UNIFORM_SLIDER_FLOAT1
 	ui_min = -1.0; ui_max = 3.0;
-	ui_tooltip = "lower values = stronger radial effect from center";
+	ui_label = "半径";
+	ui_tooltip = "值越低=中心辐射效应越强";
 > = 2.0;
 uniform float Amount < __UNIFORM_SLIDER_FLOAT1
 	ui_min = -2.0; ui_max = 1.0;
-	ui_tooltip = "Strength of black. -2.00 = Max Black, 1.00 = Max White.";
+	ui_label = "数量";
+	ui_tooltip = "黑色强度。-2.00 = 最黑, 1.00 = 最白。";
 > = -1.0;
 uniform int Slope < __UNIFORM_SLIDER_INT1
 	ui_min = 2; ui_max = 16;
-	ui_tooltip = "How far away from the center the change should start to really grow strong (odd numbers cause a larger fps drop than even numbers).";
+	ui_label = "斜率";
+	ui_tooltip = "距离中心有多远的改变应该开始变得更强大(奇数比偶数造成更大的fps下降)。";
 > = 2;
 uniform float2 Center < __UNIFORM_SLIDER_FLOAT2
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "Center of effect for 'Original' vignette type. 'New' and 'TV style' do not obey this setting.";
+	ui_label = "中心";
+	ui_tooltip = "“原始”插图类型的效果中心。“新”和“电视风格”不服从这个设置。";
 > = float2(0.5, 0.5);
 
 #include "ReShade.fxh"
@@ -106,6 +112,9 @@ float4 VignettePass(float4 vpos : SV_Position, float2 tex : TexCoord) : SV_Targe
 }
 
 technique Vignette
+<
+	ui_label = "装饰图案";
+>
 {
 	pass
 	{

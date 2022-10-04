@@ -8,13 +8,16 @@
 
 uniform float Power < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 8.0;
+	ui_label = "力度";
 > = 4.0;
 uniform float3 RGBNegativeAmount < __UNIFORM_COLOR_FLOAT3
+	ui_label = "RGB外延量";
 > = float3(0.88, 0.88, 0.88);
 
 uniform float Strength < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "Adjust the strength of the effect.";
+	ui_label = "强度";
+	ui_tooltip = "调整效果的强度。";
 > = 0.4;
 
 #include "ReShade.fxh"
@@ -41,6 +44,9 @@ float3 TechnicolorPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : 
 }
 
 technique Technicolor
+<
+	ui_label = "鲜艳色彩";
+>
 {
 	pass
 	{

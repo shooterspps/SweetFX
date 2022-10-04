@@ -22,24 +22,24 @@
 
 uniform int BlackPoint < __UNIFORM_SLIDER_INT1
 	ui_min = 0; ui_max = 255;
-	ui_label = "Black Point";
-	ui_tooltip = "The black point is the new black - literally. Everything darker than this will become completely black.";
+	ui_label = "黑色的点";
+	ui_tooltip = "黑点是新的黑点——毫不夸张地说。任何比这更黑的东西都会变成完全的黑色。";
 > = 16;
 
 uniform int WhitePoint < __UNIFORM_SLIDER_INT1
 	ui_min = 0; ui_max = 255;
-	ui_label = "White Point";
-	ui_tooltip = "The new white point. Everything brighter than this becomes completely white";
+	ui_label = "白色的点";
+	ui_tooltip = "新的白点。所有比这更亮的东西都变成了白色";
 > = 235;
 
 uniform bool HighlightClipping <
-	ui_label = "Highlight clipping pixels";
-	ui_tooltip = "Colors between the two points will stretched, which increases contrast, but details above and below the points are lost (this is called clipping).\n"
-		"This setting marks the pixels that clip.\n"
-		"Red: Some detail is lost in the highlights\n"
-		"Yellow: All detail is lost in the highlights\n"
-		"Blue: Some detail is lost in the shadows\n"
-		"Cyan: All detail is lost in the shadows.";
+	ui_label = "突出显示裁剪像素";
+	ui_tooltip = "两个点之间的颜色将被拉伸，这将增加对比度，但点上面和下面的细节将丢失(这称为剪切)。\n"
+		"此设置将标记该剪辑的像素。\n"
+		"红色:亮点中有些细节丢失了\n"
+		"黄色: 所有的细节都在亮点中消失了\n"
+		"蓝色: 一些细节在阴影中消失了\n"
+		"青色: 所有的细节都消失在阴影中。";
 > = false;
 
 #include "ReShade.fxh"
@@ -76,6 +76,9 @@ float3 LevelsPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : SV_Ta
 }
 
 technique Levels
+<
+	ui_label = "色阶调整";
+>
 {
 	pass
 	{

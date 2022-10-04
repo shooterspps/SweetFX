@@ -59,6 +59,11 @@
 	#define Nostalgia_linear 1
 #endif
 
+#if BUFFER_COLOR_BIT_DEPTH == 10
+	#undef Nostalgia_linear
+	#define Nostalgia_linear 0
+#endif
+
 /*------------------.
 | :: UI Settings :: |
 '------------------*/
@@ -66,139 +71,139 @@
 uniform int Nostalgia_scanlines
 <
 	ui_type = "combo";
-	ui_label = "Scanlines";
+	ui_label = "扫描线";
 	ui_items = 
-	"None\0"
-	"Type 1\0"
-	"Type 2\0";
+	"无\0"
+	"类型 1\0"
+	"类型 2\0";
 	//ui_category = "";
 > = 1;
 
 uniform int Nostalgia_color_reduction
 <
 	ui_type = "combo";
-	ui_label = "Color reduction type";
+	ui_label = "颜色还原类型";
 	//ui_tooltip = "Choose a color reduction type";
 	//ui_category = "";
 	ui_items = 
-	"None\0"
-	"Palette\0"
+	"无\0"
+	"调色板\0"
 	//"Quantize\0"
 	;
 > = 1;
 
 uniform bool Nostalgia_dither 
 <
-	ui_label = "Dither";
+	ui_label = "抖色";
 > = 0;
 
 uniform int Nostalgia_palette <
 	ui_type = "combo";
-	ui_label = "Palette";
-	ui_tooltip = "Choose a palette";
+	ui_label = "调色板";
+	ui_tooltip = "选择一个调色板";
 	//ui_category = "";
 	ui_items = 
-	"Custom\0"
-	"C64 palette\0"
-	"EGA palette\0"
-	"IBMPC palette\0"
-	"ZXSpectrum palette\0"
-	"AppleII palette\0"
-	"NTSC palette\0"
-	"Commodore VIC-20\0"
-	"MSX Systems\0"
-	"Thomson MO5\0"
-	"Amstrad CPC\0"
-	"Atari ST\0"
-	"Mattel Aquarius\0"
+	"自定义\0"
+	"C64 调色板\0"
+	"EGA 调色板\0"
+	"IBMPC 调色板\0"
+	"ZXSpectrum 调色板\0"
+	"AppleII 调色板\0"
+	"NTSC 调色板\0"
+	"海军准将 VIC-20\0"
+	"MSX 系统\0"
+	"汤姆森 MO5\0"
+	"阿姆斯特拉德 CPC\0"
+	"雅达利 ST\0"
+	"水瓶座\0"
 	"Gameboy\0"
-	"Aek16 palette";
+	"Aek16 调色板";
 > = 0;
 
 uniform float3 Nostalgia_color_0 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 0";
-	ui_category = "Custom palette";
+	ui_label = "颜色 0";
+	ui_category = "自定义调色板";
 > = float3(  0. ,   0. ,   0. ); //Black;
 
 uniform float3 Nostalgia_color_1 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 1";
-	ui_category = "Custom palette"; > 
+	ui_label = "颜色 1";
+	ui_category = "自定义调色板"; > 
 = float3(255. , 255. , 255. ) / 255.; //White
 
 uniform float3 Nostalgia_color_2 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 2";
-	ui_category = "Custom palette";
+	ui_label = "颜色 2";
+	ui_category = "自定义调色板";
 > = float3(136. ,   0. ,   0. ) / 255.; //Red;
 
 uniform float3 Nostalgia_color_3 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 3";
-	ui_category = "Custom palette";
+	ui_label = "颜色 3";
+	ui_category = "自定义调色板";
 > = float3(170. , 255. , 238. ) / 255.; //Cyan
 
 uniform float3 Nostalgia_color_4 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 4";
-	ui_category = "Custom palette";
+	ui_label = "颜色 4";
+	ui_category = "自定义调色板";
 > = float3(204. ,  68. , 204. ) / 255.; //Violet
 
 uniform float3 Nostalgia_color_5 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 5";
-	ui_category = "Custom palette";
+	ui_label = "颜色 5";
+	ui_category = "自定义调色板";
 > = float3(  0. , 204. ,  85. ) / 255.; //Green
 
 uniform float3 Nostalgia_color_6 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 6";
-	ui_category = "Custom palette";
+	ui_label = "颜色 6";
+	ui_category = "自定义调色板";
 > = float3(  0. ,   0. , 170. ) / 255.; //Blue
 
 uniform float3 Nostalgia_color_7 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 7";
-	ui_category = "Custom palette";
+	ui_label = "颜色 7";
+	ui_category = "自定义调色板";
 > = float3(238. , 238. , 119. ) / 255.; //Yellow 1
 
 uniform float3 Nostalgia_color_8 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 8";
-	ui_category = "Custom palette";
+	ui_label = "颜色 8";
+	ui_category = "自定义调色板";
 > = float3(221. , 136. ,  85. ) / 255.; //Orange
 
 uniform float3 Nostalgia_color_9 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 9";
-	ui_category = "Custom palette";
+	ui_label = "颜色 9";
+	ui_category = "自定义调色板";
 > = float3(102. ,  68. ,   0. ) / 255.; //Brown
 
 uniform float3 Nostalgia_color_10 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 10";
-	ui_category = "Custom palette";
+	ui_label = "颜色 10";
+	ui_category = "自定义调色板";
 > = float3(255. , 119. , 119. ) / 255.; //Yellow 2
 
 uniform float3 Nostalgia_color_11 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 11";
-	ui_category = "Custom palette";
+	ui_label = "颜色 11";
+	ui_category = "自定义调色板";
 > = float3( 51. ,  51. ,  51. ) / 255.; //Grey 1
 
 uniform float3 Nostalgia_color_12 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 12";
-	ui_category = "Custom palette";
+	ui_label = "颜色 12";
+	ui_category = "自定义调色板";
 > = float3(119. , 119. , 119. ) / 255.; //Grey 2
 
 uniform float3 Nostalgia_color_13 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 13";
-	ui_category = "Custom palette";
+	ui_label = "颜色 13";
+	ui_category = "自定义调色板";
 > = float3(170. , 255. , 102. ) / 255.; //Lightgreen
 
 uniform float3 Nostalgia_color_14 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 14";
-	ui_category = "Custom palette";
+	ui_label = "颜色 14";
+	ui_category = "自定义调色板";
 > = float3(  0. , 136. , 255. ) / 255.; //Lightblue
 
 uniform float3 Nostalgia_color_15 < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Color 15";
-	ui_category = "Custom palette";
+	ui_label = "颜色 15";
+	ui_category = "自定义调色板";
 > = float3(187. , 187. , 187. ) / 255.;  //Grey 3
 
 /*
 uniform bool Nostalgia_linear //Can't currently make a UI setting for this since I need the preprocessor for that and it does not accept uniforms from the UI
 <
-	ui_label = "Linear";
+	ui_label = "线性";
 	//ui_category = "Color options";
 > = 0;
 */
@@ -207,11 +212,13 @@ uniform bool Nostalgia_linear //Can't currently make a UI setting for this since
 | :: Sampler :: |
 '--------------*/
 
+#if Nostalgia_linear
 sampler Linear
 {
 	Texture = ReShade::BackBufferTex;
 	SRGBTexture = true;
 };
+#endif
 
 
 /*-------------.
@@ -587,6 +594,9 @@ float3 PS_Nostalgia(float4 vpos : SV_Position, float2 texcoord : TEXCOORD) : SV_
 '----------------*/
 
 technique Nostalgia
+< 
+	ui_label = "怀旧";
+>
 {
 	pass NostalgiaPass
 	{

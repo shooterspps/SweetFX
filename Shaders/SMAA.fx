@@ -23,67 +23,67 @@
 #include "ReShadeUI.fxh"
 
 uniform int EdgeDetectionType < __UNIFORM_COMBO_INT1
-	ui_items = "Luminance edge detection\0Color edge detection\0Depth edge detection\0";
-	ui_label = "Edge Detection Type";
+	ui_items = "亮度边缘检测\0彩色边缘检测\0深度边缘检测\0";
+	ui_label = "边缘检测类型";
 > = 1;
 
 #ifdef SMAA_PRESET_CUSTOM
 uniform float EdgeDetectionThreshold < __UNIFORM_DRAG_FLOAT1
 	ui_min = 0.05; ui_max = 0.20; ui_step = 0.001;
-	ui_tooltip = "Edge detection threshold. If SMAA misses some edges try lowering this slightly.";
-	ui_label = "Edge Detection Threshold";
+	ui_tooltip = "边缘检测阈值。如果SMAA错过了一些边，尝试稍微降低这个值。";
+	ui_label = "边缘检测阈值";
 > = 0.10;
 
 uniform float DepthEdgeDetectionThreshold < __UNIFORM_DRAG_FLOAT1
 	ui_min = 0.001; ui_max = 0.10; ui_step = 0.001;
-	ui_tooltip = "Depth Edge detection threshold. If SMAA misses some edges try lowering this slightly.";
-	ui_label = "Depth Edge Detection Threshold";
+	ui_tooltip = "深度边缘检测阈值。如果SMAA错过了一些边，尝试稍微降低这个值。";
+	ui_label = "深度边缘检测阈值";
 > = 0.01;
 
 uniform int MaxSearchSteps < __UNIFORM_SLIDER_INT1
 	ui_min = 0; ui_max = 112;
-	ui_label = "Max Search Steps";
-	ui_tooltip = "Determines the radius SMAA will search for aliased edges.";
+	ui_label = "最大搜索步骤";
+	ui_tooltip = "确定了SMAA搜索混叠边的半径。";
 > = 32;
 
 uniform int MaxSearchStepsDiagonal < __UNIFORM_SLIDER_INT1
 	ui_min = 0; ui_max = 20;
-	ui_label = "Max Search Steps Diagonal";
-	ui_tooltip = "Determines the radius SMAA will search for diagonal aliased edges";
+	ui_label = "最大搜索步骤对角线";
+	ui_tooltip = "确定了SMAA搜索对角线混叠边的半径";
 > = 16;
 
 uniform int CornerRounding < __UNIFORM_SLIDER_INT1
 	ui_min = 0; ui_max = 100;
-	ui_label = "Corner Rounding";
-	ui_tooltip = "Determines the percent of anti-aliasing to apply to corners.";
+	ui_label = "圆角";
+	ui_tooltip = "确定角的抗锯齿率。";
 > = 25;
 
 uniform bool PredicationEnabled < __UNIFORM_INPUT_BOOL1
-	ui_label = "Enable Predicated Thresholding";
+	ui_label = "启用预测阈值";
 > = false;
 
 uniform float PredicationThreshold < __UNIFORM_DRAG_FLOAT1
 	ui_min = 0.005; ui_max = 1.00; ui_step = 0.01;
-	ui_tooltip = "Threshold to be used in the additional predication buffer.";
-	ui_label = "Predication Threshold";
+	ui_tooltip = "在附加预测缓冲区中使用的阈值。";
+	ui_label = "预测阈值";
 > = 0.01;
 
 uniform float PredicationScale < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 1; ui_max = 8;
-	ui_tooltip = "How much to scale the global threshold used for luma or color edge.";
-	ui_label = "Predication Scale";
+	ui_tooltip = "用于亮度或颜色边缘的全局阈值缩放多少。";
+	ui_label = "预测范围";
 > = 2.0;
 
 uniform float PredicationStrength < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0; ui_max = 4;
-	ui_tooltip = "How much to locally decrease the threshold.";
-	ui_label = "Predication Strength";
+	ui_tooltip = "局部降低多少阈值。";
+	ui_label = "预测强度";
 > = 0.4;
 #endif
 
 uniform int DebugOutput < __UNIFORM_COMBO_INT1
-	ui_items = "None\0View edges\0View weights\0";
-	ui_label = "Debug Output";
+	ui_items = "无\0边缘视图\0权重视图\0";
+	ui_label = "调试输出";
 > = false;
 
 #ifdef SMAA_PRESET_CUSTOM
@@ -112,8 +112,12 @@ uniform int DebugOutput < __UNIFORM_COMBO_INT1
 #define SMAA_BRANCH [branch]
 #define SMAA_FLATTEN [flatten]
 
-#if (__RENDERER__ == 0xb000 || __RENDERER__ == 0xb100)
-	#define SMAAGather(tex, coord) tex2Dgather(tex, coord, 0)
+#if (__RENDERER__ == 0xb000 || __RENDERER__ == 0xb100 || __RENDERER__ >= 0x10000)
+	#if (__RESHADE__ < 40800)
+		#define SMAAGather(tex, coord) tex2Dgather(tex, coord, 0)
+	#else
+		#define SMAAGather(tex, coord) tex2DgatherR(tex, coord)
+	#endif
 #endif
 
 #include "SMAA.fxh"
@@ -166,14 +170,18 @@ sampler colorGammaSampler
 	Texture = ReShade::BackBufferTex;
 	AddressU = Clamp; AddressV = Clamp;
 	MipFilter = Point; MinFilter = Linear; MagFilter = Linear;
-	SRGBTexture = false;
+	#if BUFFER_COLOR_BIT_DEPTH != 10
+		SRGBTexture = false;
+	#endif
 };
 sampler colorLinearSampler
 {
 	Texture = ReShade::BackBufferTex;
 	AddressU = Clamp; AddressV = Clamp;
 	MipFilter = Point; MinFilter = Linear; MagFilter = Linear;
-	SRGBTexture = true;
+	#if BUFFER_COLOR_BIT_DEPTH != 10
+		SRGBTexture = true;
+	#endif
 };
 sampler edgesSampler
 {
@@ -287,6 +295,9 @@ float3 SMAANeighborhoodBlendingWrapPS(
 // Rendering passes
 
 technique SMAA
+<
+	ui_label = "SMAA抗锯齿";
+>
 {
 	pass LinearizeDepthPass
 	{
@@ -320,6 +331,8 @@ technique SMAA
 		VertexShader = SMAANeighborhoodBlendingWrapVS;
 		PixelShader = SMAANeighborhoodBlendingWrapPS;
 		StencilEnable = false;
-		SRGBWriteEnable = true;
+		#if BUFFER_COLOR_BIT_DEPTH != 10
+			SRGBWriteEnable = true;
+		#endif
 	}
 }

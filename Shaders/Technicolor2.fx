@@ -7,21 +7,25 @@
 #include "ReShadeUI.fxh"
 
 uniform float3 ColorStrength < __UNIFORM_COLOR_FLOAT3
-	ui_tooltip = "Higher means darker and more intense colors.";
+	ui_tooltip = "越高意味着颜色越深、越强烈。";
+	ui_label = "色强度";
 > = float3(0.2, 0.2, 0.2);
 
 uniform float Brightness < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.5; ui_max = 1.5;
-	ui_tooltip = "Higher means brighter image.";
+	ui_label = "亮度";
+	ui_tooltip = "越高图像越亮。";
 > = 1.0;
 uniform float Saturation < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.5;
-	ui_tooltip = "Additional saturation control since this effect tends to oversaturate the image.";
+	ui_label = "饱和度";
+	ui_tooltip = "额外的饱和度控制，因为这种效果往往会使图像过度饱和。";
 > = 1.0;
 
 uniform float Strength < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "Adjust the strength of the effect.";
+	ui_label = "强度";
+	ui_tooltip = "调整效果的强度。";
 > = 1.0;
 
 #include "ReShade.fxh"
@@ -53,6 +57,9 @@ float3 TechnicolorPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : 
 }
 
 technique Technicolor2
+<
+	ui_label = "鲜艳色彩2";
+>
 {
 	pass
 	{

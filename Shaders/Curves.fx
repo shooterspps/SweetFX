@@ -9,18 +9,21 @@
 
 uniform int Mode <
 	ui_type = "combo";
-	ui_items = "Luma\0Chroma\0Both Luma and Chroma\0";
-	ui_tooltip = "Choose what to apply contrast to.";
+	ui_items = "亮度\0色度\0亮度和色度\0";
+	ui_label = "自适应增强";
+	ui_tooltip = "选择应用对比的对象。";
 > = 0;
 uniform int Formula <
 	ui_type = "combo";
-	ui_items = "Sine\0Abs split\0Smoothstep\0Exp formula\0Simplified Catmull-Rom (0,0,1,1)\0Perlins Smootherstep\0Abs add\0Techicolor Cinestyle\0Parabola\0Half-circles\0Polynomial split\0";
-	ui_tooltip = "The contrast s-curve you want to use. Note that Technicolor Cinestyle is practically identical to Sine, but runs slower. In fact I think the difference might only be due to rounding errors. I prefer 2 myself, but 3 is a nice alternative with a little more effect (but harsher on the highlight and shadows) and it's the fastest formula.";
+	ui_items = "正弦\0分裂\0平滑步骤\0经验公式\0简化卡特莫尔罗 (0,0,1,1)\0举析平滑阶梯\0添加\0炫彩电影\0抛物线\0半圆\0多项式分裂\0";
+	ui_label = "公式";
+	ui_tooltip = "你想使用的对比s曲线。\n请注意，'炫彩电影' 实际上与sin相同，但运行速度较慢。\n事实上，我认为这种差异可能只是由于舍入误差。\n我自己更喜欢2，但3是一个更好的选择，更有效果\n(但在高光和阴影上更粗糙)，这是最快的公式。";
 > = 4;
 
 uniform float Contrast < __UNIFORM_SLIDER_FLOAT1
 	ui_min = -1.0; ui_max = 1.0;
-	ui_tooltip = "The amount of contrast you want.";
+	ui_label = "对比度";
+	ui_tooltip = "你想要的对比度。";
 > = 0.65;
 
 #include "ReShade.fxh"
@@ -31,7 +34,7 @@ float4 CurvesPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : SV_Ta
 	float3 lumCoeff = float3(0.2126, 0.7152, 0.0722);  //Values to calculate luma with
 	float Contrast_blend = Contrast; 
 	const float PI = 3.1415927;
-
+   
 	/*-----------------------------------------------------------.
 	/               Separation of Luma and Chroma                 /
 	'-----------------------------------------------------------*/
@@ -190,6 +193,9 @@ float4 CurvesPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : SV_Ta
 }
 
 technique Curves
+<
+	ui_label = "颜色曲线";
+>
 {
 	pass
 	{

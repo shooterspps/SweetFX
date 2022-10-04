@@ -9,10 +9,12 @@
 
 uniform float2 Shift < __UNIFORM_SLIDER_FLOAT2
 	ui_min = -10; ui_max = 10;
-	ui_tooltip = "Distance (X,Y) in pixels to shift the color components. For a slightly blurred look try fractional values (.5) between two pixels.";
+	ui_label =  "变换";
+	ui_tooltip = "以像素为单位的距离(X,Y)，以移动颜色组件。对于稍微模糊的外观，请尝试两个像素之间的小数值(.5)。";
 > = float2(2.5, -0.5);
 uniform float Strength < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
+	ui_label = "强度";
 > = 0.5;
 
 #include "ReShade.fxh"
@@ -30,6 +32,9 @@ float3 ChromaticAberrationPass(float4 vpos : SV_Position, float2 texcoord : TexC
 }
 
 technique CA
+<
+	ui_label = "色差";
+>
 {
 	pass
 	{

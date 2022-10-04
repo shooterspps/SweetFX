@@ -36,17 +36,17 @@
 
 uniform int splitscreen_mode <
     ui_type = "combo";
-    ui_label = "Mode";
-    ui_tooltip = "Choose a mode";
+    ui_label = "模式";
+    ui_tooltip = "选择模式";
     //ui_category = "";
     ui_items = 
-    "Vertical 50/50 split\0"
-    "Vertical 25/50/25 split\0"
-    "Angled 50/50 split\0"
-    "Angled 25/50/25 split\0"
-    "Horizontal 50/50 split\0"
-    "Horizontal 25/50/25 split\0"
-    "Diagonal split\0"
+    "垂直 50/50 分割\0"
+    "垂直 25/50/25 分割\0"
+    "斜角 50/50 分割\0"
+    "斜角 25/50/25 分割\0"
+    "水平 50/50 分割\0"
+    "水平 25/50/25 分割\0"
+    "对角线分割\0"
     ;
 > = 0;
 
@@ -157,6 +157,9 @@ float4 PS_After(float4 pos : SV_Position, float2 texcoord : TEXCOORD) : SV_Targe
 '-----------------*/
 
 technique Before
+<
+	ui_label = "效果对比工具-之前";
+>
 {
     pass
     {
@@ -167,6 +170,9 @@ technique Before
 }
 
 technique After
+<
+	ui_label = "效果对比工具-之后";
+>
 {
     pass
     {

@@ -6,7 +6,7 @@
 
 uniform float3 RGB_Curve < __UNIFORM_SLIDER_FLOAT3
 	ui_min = 1.0; ui_max = 15.0;
-	ui_label = "RGB Curve";
+	ui_label = "RGB 曲线";
 > = float3(8.0, 8.0, 8.0);
 uniform float3 RGB_C < __UNIFORM_SLIDER_FLOAT3
 	ui_min = 0.2; ui_max = 0.5;
@@ -15,17 +15,21 @@ uniform float3 RGB_C < __UNIFORM_SLIDER_FLOAT3
 
 uniform float Contrast < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
+	ui_label = "对比度";
 > = 0.1;
 uniform float Saturation < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 8.0;
+	ui_label = "饱和度";
 > = 3.0;
 uniform float Colorfulness < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.1; ui_max = 2.5;
+	ui_label = "色彩";
 > = 2.5;
 
 uniform float Strength < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "Adjust the strength of the effect.";
+	ui_label = "强度";
+	ui_tooltip = "调整效果的强度。";
 > = 0.20;
 
 #include "ReShade.fxh"

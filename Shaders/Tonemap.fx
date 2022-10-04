@@ -7,29 +7,33 @@
 
 uniform float Gamma < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 2.0;
-	ui_tooltip = "Adjust midtones. 1.0 is neutral. This setting does exactly the same as the one in Lift Gamma Gain, only with less control.";
+	ui_tooltip = "调整中间调。1.0是中性的。这个设置与提升伽马获得中的设置完全相同，只是控制更少。";
 > = 1.0;
 uniform float Exposure < __UNIFORM_SLIDER_FLOAT1
 	ui_min = -1.0; ui_max = 1.0;
-	ui_tooltip = "Adjust exposure";
+	ui_label = "曝光";
+	ui_tooltip = "调整曝光";
 > = 0.0;
 uniform float Saturation < __UNIFORM_SLIDER_FLOAT1
 	ui_min = -1.0; ui_max = 1.0;
-	ui_tooltip = "Adjust saturation";
+	ui_label = "饱和";
+	ui_tooltip = "调整饱和度";
 > = 0.0;
 
 uniform float Bleach < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "Brightens the shadows and fades the colors";
+	ui_label = "漂白";
+	ui_tooltip = "阴影变亮，颜色变淡";
 > = 0.0;
 
 uniform float Defog < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "How much of the color tint to remove";
+	ui_label = "除雾";
+	ui_tooltip = "要去掉多少色彩";
 > = 0.0;
 uniform float3 FogColor < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Defog Color";
-	ui_tooltip = "Which color tint to remove";
+	ui_label = "除雾颜色";
+	ui_tooltip = "要去掉哪一种颜色";
 > = float3(0.0, 0.0, 1.0);
 
 
@@ -63,6 +67,9 @@ float3 TonemapPass(float4 position : SV_Position, float2 texcoord : TexCoord) : 
 }
 
 technique Tonemap
+<
+	ui_label = "色调映射";
+>
 {
 	pass
 	{

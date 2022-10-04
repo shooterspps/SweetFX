@@ -9,21 +9,24 @@
 
 uniform float Intensity < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "How visible the grain is. Higher is more visible.";
+	ui_label = "强度";
+	ui_tooltip = "可见纹理。越高越明显。";
 > = 0.50;
 uniform float Variance < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "Controls the variance of the Gaussian noise. Lower values look smoother.";
+	ui_label = "方差";
+	ui_tooltip = "控制高斯噪声的方差。较低的值看起来更平滑";
 > = 0.40;
 uniform float Mean < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "Affects the brightness of the noise.";
+	ui_label = "平均";
+	ui_tooltip = "影响噪音的亮度。";
 > = 0.5;
 
 uniform int SignalToNoiseRatio < __UNIFORM_SLIDER_INT1
 	ui_min = 0; ui_max = 16;
-	ui_label = "Signal-to-Noise Ratio";
-	ui_tooltip = "Higher Signal-to-Noise Ratio values give less grain to brighter pixels. 0 disables this feature.";
+	ui_label = "信噪比";
+	ui_tooltip = "较高的信噪比值给更亮的像素更少的纹理。0禁用此特性。";
 > = 6;
 
 uniform float Timer < source = "timer"; >;
@@ -95,6 +98,9 @@ float3 FilmGrainPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : SV
 }
 
 technique FilmGrain
+< 
+	ui_label = "胶片颗粒1";
+>
 {
 	pass
 	{

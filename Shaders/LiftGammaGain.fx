@@ -7,18 +7,18 @@
 
 uniform float3 RGB_Lift < __UNIFORM_SLIDER_FLOAT3
 	ui_min = 0.0; ui_max = 2.0;
-	ui_label = "RGB Lift";
-	ui_tooltip = "Adjust shadows for red, green and blue.";
+	ui_label = "RGB 阴影";
+	ui_tooltip = "调整红色，绿色和蓝色的阴影。";
 > = float3(1.0, 1.0, 1.0);
 uniform float3 RGB_Gamma < __UNIFORM_SLIDER_FLOAT3
 	ui_min = 0.0; ui_max = 2.0;
-	ui_label = "RGB Gamma";
-	ui_tooltip = "Adjust midtones for red, green and blue.";
+	ui_label = "RGB 间调";
+	ui_tooltip = "调整红、绿、蓝的中间调。";
 > = float3(1.0, 1.0, 1.0);
 uniform float3 RGB_Gain < __UNIFORM_SLIDER_FLOAT3
 	ui_min = 0.0; ui_max = 2.0;
-	ui_label = "RGB Gain";
-	ui_tooltip = "Adjust highlights for red, green and blue.";
+	ui_label = "RGB 高光";
+	ui_tooltip = "调整红色、绿色和蓝色的高光。";
 > = float3(1.0, 1.0, 1.0);
 
 
@@ -43,6 +43,9 @@ float3 LiftGammaGainPass(float4 position : SV_Position, float2 texcoord : TexCoo
 
 
 technique LiftGammaGain
+<
+	ui_label = "提升伽马获得";
+>
 {
 	pass
 	{

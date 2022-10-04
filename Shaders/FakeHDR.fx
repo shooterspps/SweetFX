@@ -9,16 +9,16 @@
 
 uniform float HDRPower < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 8.0;
-	ui_label = "Power";
+	ui_label = "强度";
 > = 1.30;
 uniform float radius1 < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 8.0;
-	ui_label = "Radius 1";
+	ui_label = "半径 1";
 > = 0.793;
 uniform float radius2 < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 8.0;
-	ui_label = "Radius 2";
-	ui_tooltip = "Raising this seems to make the effect stronger and also brighter.";
+	ui_label = "半径 2";
+	ui_tooltip = "提高这一比例似乎会使效果更强，也更明显。";
 > = 0.87;
 
 #include "ReShade.fxh"
@@ -58,6 +58,9 @@ float3 HDRPass(float4 vpos : SV_Position, float2 texcoord : TexCoord) : SV_Targe
 }
 
 technique HDR
+< 
+	ui_label = "伪HDR(伪高动态光照渲染)";
+>
 {
 	pass
 	{

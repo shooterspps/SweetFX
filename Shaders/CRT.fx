@@ -14,62 +14,71 @@
 
 uniform float Amount < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 1.0;
-	ui_tooltip = "Amount of CRT effect you want";
+	ui_label = "总数";
+	ui_tooltip = "你想要的效果";
 > = 1.00;
 uniform float Resolution < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 1.0; ui_max = 8.0;
-	ui_tooltip = "Input size coefficient (low values gives the 'low - res retro look').";
+	ui_label = "分辨率";
+	ui_tooltip = "输入大小系数(低值给“低分辨率复古外观”).";
 > = 1.15;
 uniform float Gamma < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 4.0;
-	ui_tooltip = "Gamma of simulated CRT";
+	ui_label = "Gamma";
+	ui_tooltip = "模拟CRT的伽马值";
 > = 2.4;
 uniform float MonitorGamma < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 4.0;
-	ui_tooltip = "Gamma of display monitor";
+	ui_label = "监控Gamma";
+	ui_tooltip = "显示屏Gamma";
 > = 2.2;
 uniform float Brightness < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 3.0;
-	ui_tooltip = "Used to boost brightness a little.";
+	ui_label = "亮度";
+	ui_tooltip = "用来提高亮度。";
 > = 0.9;
 
 uniform int ScanlineIntensity < __UNIFORM_SLIDER_INT1
 	ui_min = 2; ui_max = 4;
-	ui_label = "Scanline Intensity";
+	ui_label = "扫描线强度";
 > = 2;
 uniform bool ScanlineGaussian <
-	ui_label = "Scanline Bloom Effect";
-	ui_tooltip = "Use the new nongaussian scanlines bloom effect.";
+	ui_label = "扫描线泛光效果";
+	ui_tooltip = "使用新的非澳洲扫描线泛光效果。";
 > = true;
 
 uniform bool Curvature <
-	ui_tooltip = "Barrel effect";
+	ui_tooltip = "圆筒效应";
+	ui_label = "曲率";
 > = false;
 uniform float CurvatureRadius < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 2.0;
-	ui_label = "Curvature Radius";
+	ui_label = "曲率半径";
 > = 1.5;
 uniform float CornerSize < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.00; ui_max = 0.02; ui_step = 0.001;
-	ui_label = "Corner Size";
-	ui_tooltip = "Higher values => more rounded corner";
+	ui_label = "角大小";
+	ui_tooltip = "更高的值=>更圆角";
 > = 0.0100;
 uniform float ViewerDistance < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0; ui_max = 4.0;
-	ui_Label = "Viewer Distance";
-	ui_tooltip = "Simulated distance from viewer to monitor";
+	ui_tooltip = "从观察者到监视器的模拟距离";
+	ui_label = "观看距离";
 > = 2.00;
 uniform float2 Angle < __UNIFORM_SLIDER_FLOAT2
 	ui_min = -0.2; ui_max = 0.2;
-	ui_tooltip = "Tilt angle in radians";
+	ui_label = "角";
+	ui_tooltip = "以弧度为单位的倾斜角度";
 > = 0.00;
 
 uniform float Overscan < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 1.0; ui_max = 1.10; ui_step = 0.01;
-	ui_tooltip = "Overscan (e.g. 1.02 for 2% overscan).";
+	ui_label = "过扫描";
+	ui_tooltip = "超扫描(如1.02扫描为2%)。";
 > = 1.01;
 uniform bool Oversample <
-	ui_tooltip = "Enable 3x oversampling of the beam profile (warning : performance hit)";
+	ui_label = "过采样";
+	ui_tooltip = "启用3x过采样的波束轮廓(警告:性能击中)";
 > = true;
 
 #include "ReShade.fxh"
@@ -303,6 +312,10 @@ float3 AdvancedCRTPass(float4 position : SV_Position, float2 tex : TEXCOORD) : S
 }
 
 technique AdvancedCRT
+<
+	ui_label = "老电视效果";
+	ui_tooltip = "没啥用的垃圾效果";
+>
 {
 	pass
 	{

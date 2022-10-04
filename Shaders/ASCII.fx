@@ -66,9 +66,9 @@ uniform float Version <
 uniform int Ascii_spacing < __UNIFORM_SLIDER_INT1
 	ui_min = 0;
 	ui_max = 5;
-	ui_label = "Character Spacing";
-	ui_tooltip = "Determines the spacing between characters. I feel 1 to 3 looks best.";
-	ui_category = "Font style";
+	ui_label = "字符间距";
+	ui_tooltip = "确定字符之间的间距。我觉得1比3看起来最好。";
+	ui_category = "字体风格";
 > = 1;
 
 /*
@@ -78,18 +78,18 @@ uniform int Ascii_font <
 	ui_max = 2;
 	ui_label = "Font Size";
 	ui_tooltip = "1 = 5x5 font, 2 = 3x5 font";
-	ui_category = "Font style";
+	ui_category = "字体风格";
 > = 1;
 */
 
 uniform int Ascii_font <
 	ui_type = "combo";
-	ui_label = "Font Size";
-	ui_tooltip = "Choose font size";
-	ui_category = "Font style";
+	ui_label = "字体大小";
+	ui_tooltip = "选择字体的大小";
+	ui_category = "字体风格";
 	ui_items = 
-	"Smaller 3x5 font\0"
-	"Normal 5x5 font\0"
+	"小 3x5 font\0"
+	"正常 5x5 font\0"
 	;
 > = 1;
 
@@ -97,50 +97,50 @@ uniform int Ascii_font <
 uniform int Ascii_font_color_mode < __UNIFORM_SLIDER_INT1
 	ui_min = 0;
 	ui_max = 2;
-	ui_label = "Font Color Mode";
+	ui_label = "字体颜色模式";
 	ui_tooltip = "0 = Foreground color on background color, 1 = Colorized grayscale, 2 = Full color";
-	ui_category = "Color options";
+	ui_category = "颜色选项";
 > = 1;
 
 uniform float3 Ascii_font_color < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Font Color";
-	ui_tooltip = "Choose a font color";
-	ui_category = "Color options";
+	ui_label = "字体颜色";
+	ui_tooltip = "选择字体颜色";
+	ui_category = "颜色选项";
 > = float3(1.0, 1.0, 1.0);
 
 uniform float3 Ascii_background_color < __UNIFORM_COLOR_FLOAT3
-	ui_label = "Background Color";
-	ui_tooltip = "Choose a background color";
-	ui_category = "Color options";
+	ui_label = "背景颜色";
+	ui_tooltip = "选择背景色";
+	ui_category = "颜色选项";
 > = float3(0.0, 0.0, 0.0);
 
 uniform bool Ascii_swap_colors <
-	ui_label = "Swap Colors";
-	ui_tooltip = "Swaps the font and background color when you are too lazy to edit the settings above (I know I am)";
-	ui_category = "Color options";
+	ui_label = "交换颜色";
+	ui_tooltip = "当你懒得编辑上面的设置时，切换字体和背景颜色(我知道我是)";
+	ui_category = "颜色选项";
 > = 0;
 
 uniform bool Ascii_invert_brightness <
-	ui_label = "Invert Brightness";
-	ui_category = "Color options";
+	ui_label = "反转亮度";
+	ui_category = "颜色选项";
 > = 0;
 
 uniform bool Ascii_dithering <
-	ui_label = "Dithering";
-	ui_category = "Dithering";
+	ui_label = "混合";
+	ui_category = "混合";
 > = 1;
 
 uniform float Ascii_dithering_intensity < __UNIFORM_SLIDER_FLOAT1
 	ui_min = 0.0;
 	ui_max = 4.0;
-	ui_label = "Dither shift intensity";
-	ui_tooltip = "For debugging purposes";
-	ui_category = "Debugging";
+	ui_label = "抖动位移强度";
+	ui_tooltip = "用于调试目的";
+	ui_category = "调试";
 > = 2.0;
 
 uniform bool Ascii_dithering_debug_gradient <
-	ui_label = "Dither debug gradient";
-	ui_category = "Debugging";
+	ui_label = "抖动调试梯度";
+	ui_category = "调试";
 > = 0;
 
 /*-------------------------.
@@ -437,6 +437,10 @@ float3 PS_Ascii(float4 position : SV_Position, float2 texcoord : TEXCOORD) : SV_
 
 
 technique ASCII
+<
+	ui_label = "乱码模式";
+	ui_tooltip = "画面变成一堆乱码 - 没什么用";
+>
 {
 	pass ASCII
 	{
